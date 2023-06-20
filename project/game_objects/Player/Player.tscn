@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/player/Player.cs" type="Script" id=1]
+[ext_resource path="res://src/player/PlayerCamera.cs" type="Script" id=2]
+[ext_resource path="res://game_objects/Player/DeadBody.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/player/PlayerArea.cs" type="Script" id=4]
+[ext_resource path="res://src/player/ObjectPlacer.cs" type="Script" id=5]
+[ext_resource path="res://materials/object_preview_material.tres" type="Material" id=6]
+[ext_resource path="res://game_objects/Utils/Text3D.tscn" type="PackedScene" id=8]
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.4
+height = 0.2
+
+[sub_resource type="SphereShape" id=4]
+radius = 3.72383
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+MaxSpeed = 0.2
+Mass = 0.8
+CameraNodePath = NodePath("Head/CameraAnimation/ShakeContainer/Camera")
+HeadPath = NodePath("Head")
+AreaNodePath = NodePath("Area")
+HandPointNodePath = NodePath("Head/CameraAnimation/ShakeContainer/Camera/Hand/HandPoint")
+LightPath = NodePath("Light")
+CrouchCollisionShapePath = NodePath("CrouchCollisionShape")
+Text3DPath = NodePath("WeaponText3D")
+DeadBodyScene = ExtResource( 3 )
+JumpStrength = 12.0
+
+[node name="Head" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7898, 0 )
+
+[node name="CameraAnimation" type="Spatial" parent="Head"]
+
+[node name="ShakeContainer" type="Spatial" parent="Head/CameraAnimation"]
+
+[node name="Camera" type="Camera" parent="Head/CameraAnimation/ShakeContainer"]
+current = true
+fov = 90.0
+near = 0.1
+script = ExtResource( 2 )
+PlayerNodePath = NodePath("../../../..")
+
+[node name="Hand" type="Spatial" parent="Head/CameraAnimation/ShakeContainer/Camera"]
+transform = Transform( 0.415052, 0, 0, 0, 0.415052, 0, 0, 0, 0.415052, 0.614401, -0.248, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HandPoint" type="Spatial" parent="Head/CameraAnimation/ShakeContainer/Camera/Hand"]
+transform = Transform( 1.41505, 0, 0, 0, 1.41505, 0, 0, 0, 1.41505, 0, 0, -1.12314 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ObjectPlacer" type="Spatial" parent="Head/CameraAnimation/ShakeContainer/Camera"]
+script = ExtResource( 5 )
+PlayerNodePath = NodePath("../../../../..")
+ObjectPreviewMaterial = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.586565, 0 )
+shape = SubResource( 2 )
+
+[node name="CrouchCollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.40854, 0 )
+shape = SubResource( 2 )
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 9
+collision_mask = 9
+script = ExtResource( 4 )
+PlayerNodePath = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71327, 0 )
+shape = SubResource( 4 )
+
+[node name="Light" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37178, 0 )
+light_energy = 0.1
+omni_range = 16.0
+omni_attenuation = 3.36358
+
+[node name="WeaponText3D" parent="." instance=ExtResource( 8 )]
+visible = false

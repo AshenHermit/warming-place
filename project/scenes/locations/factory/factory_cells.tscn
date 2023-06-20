@@ -1,0 +1,50 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://game_objects/GenerationManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_objects/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/models/locations/factory/maps/factory_cells_static_body.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game_objects/UI/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/models/locations/factory/enemies/wall_worm/wall_worm.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game_objects/VfxManager.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game_objects/Layers/Withering/withering_environment.tres" type="Environment" id=14]
+[ext_resource path="res://game_objects/PlayerInventory.tscn" type="PackedScene" id=16]
+[ext_resource path="res://game_objects/NpcManager.tscn" type="PackedScene" id=17]
+[ext_resource path="res://game_objects/WorldEnvironment.tscn" type="PackedScene" id=20]
+[ext_resource path="res://game_objects/Items/Tools/MacroExploiterItem.tscn" type="PackedScene" id=23]
+[ext_resource path="res://game_objects/Weapons/MacroExploiterWeapon.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scripts/SetEnvironment.gd" type="Script" id=38]
+
+[node name="scene" type="Spatial"]
+script = ExtResource( 38 )
+environment = ExtResource( 14 )
+
+[node name="PlayerInventory" parent="." instance=ExtResource( 16 )]
+
+[node name="NpcManager" parent="." instance=ExtResource( 17 )]
+
+[node name="VfxManager" parent="." instance=ExtResource( 7 )]
+
+[node name="GenerationManager" parent="." instance=ExtResource( 1 )]
+VoxelLODTerrainPath = NodePath("")
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.14926, 1.25778, -3.88811 )
+
+[node name="UI" parent="." instance=ExtResource( 4 )]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 20 )]
+environment = null
+
+[node name="factory_cells_static_body" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00229746, 0, 0.000762582 )
+
+[node name="macro_exploiter_rigid_body" parent="." instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13755, 1.0297 )
+Properties = {
+"placeable": true,
+"weapon": true,
+"weapon_scene": ExtResource( 31 )
+}
+
+[node name="wall_worm" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.61622, 3.80441, -18.3598 )

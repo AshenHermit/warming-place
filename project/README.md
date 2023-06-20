@@ -1,0 +1,1 @@
+### This project requires [godot-python](https://github.com/touilleMan/godot-python)

@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/ui/inventory/Inventory.cs" type="Script" id=1]
+[ext_resource path="res://game_objects/UI/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game_objects/UI/Item.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/ui/windows/WindowTopbar.cs" type="Script" id=4]
+[ext_resource path="res://ui_theme.tres" type="Theme" id=5]
+[ext_resource path="res://resources/ui/elements/panel.png" type="Texture" id=6]
+[ext_resource path="res://src/ui/windows/Window.cs" type="Script" id=7]
+
+[sub_resource type="Theme" id=14]
+
+[sub_resource type="StyleBoxTexture" id=15]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 256, 256 )
+margin_left = 12.0
+margin_right = 12.0
+margin_top = 12.0
+margin_bottom = 12.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="InventoryWindow" type="VBoxContainer"]
+margin_left = 84.4337
+margin_top = 65.4064
+margin_right = 730.0
+margin_bottom = 414.406
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme = SubResource( 14 )
+custom_constants/separation = 0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBar" type="MarginContainer" parent="."]
+margin_right = 645.0
+margin_bottom = 24.0
+script = ExtResource( 4 )
+
+[node name="PanelContainer" type="PanelContainer" parent="TopBar"]
+margin_right = 645.0
+margin_bottom = 24.0
+mouse_filter = 2
+theme = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="TopBar/PanelContainer"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 641.0
+margin_bottom = 20.0
+text = "title"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_top = 24.0
+margin_right = 645.0
+margin_bottom = 348.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+margin_right = 645.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 5 )
+custom_styles/panel = SubResource( 15 )
+
+[node name="Inventory" type="MarginContainer" parent="MarginContainer/PanelContainer" instance=ExtResource( 2 )]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 633.0
+margin_bottom = 312.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+UIItemPackedScene = ExtResource( 3 )
+ItemsContainerNodePath = NodePath("VSplitContainer/MarginContainer2/ItemsContainer")
+NameLabelNodePath = NodePath("VSplitContainer/MarginContainer/MarginContainer/VBoxContainer/NameLabel")
+DescriptionLabelNodePath = NodePath("VSplitContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/DescriptionText")
+
+[connection signal="gui_input" from="TopBar" to="TopBar" method="OnGuiInput"]

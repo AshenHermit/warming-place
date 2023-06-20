@@ -1,0 +1,119 @@
+.App {
+  text-align: center;
+  font-family: Consolas, "Courier New", monospace;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+  color: white;
+}
+
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ui-container{
+  background-color: #1e1e1e;
+  height: 100vh;
+  width: 100vw;
+
+  display: grid;
+  grid-template-columns: auto 4px auto;
+  grid-gap: calc(4px * 2);
+  align-items: stretch;
+  justify-content: start;
+}
+.divider {
+  background-color: #161616;
+  /* height: 2px; */
+  width: 4px;
+  height: 100%;
+  cursor: col-resize;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+}
+.editor-container{
+  padding: 1em;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+}
+.console-container{
+  padding: 1em;
+  display: flex;
+  height: auto;
+  flex-direction: column;
+}
+.container-header{
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.container-header-button{
+  font-family: inherit;
+  transition: all 0.05s ease;
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  text-align: center;
+  border: 0px solid #babfc3;
+  padding: 6px 16px;
+  color: #202223;
+  background: #1e1e1e;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px;
+  color: #fff;
+
+}
+.container-header-button:hover {
+  background: #2c2e30;
+  /* outline: 1px solid transparent; */
+}
+.container-header-button:active {
+  background: #fff;
+  color: #000;
+  /* outline: 1px solid transparent; */
+}
+.editor{
+  
+}

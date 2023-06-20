@@ -1,0 +1,428 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://game_objects/GenerationManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_objects/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/models/computers/old/old_system_unit/system_unit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game_objects/UI/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game_objects/Items/tracer_block.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/models/locations/city/city_1_static_body.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game_objects/VfxManager.tscn" type="PackedScene" id=7]
+[ext_resource path="res://materials/object_preview_material.tres" type="Material" id=8]
+[ext_resource path="res://prototyping/TestGeometry/TestStaticCube.tscn" type="PackedScene" id=9]
+[ext_resource path="res://resources/models/items/printer_detail_1.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://materials/withering_surface.tres" type="Material" id=11]
+[ext_resource path="res://game_objects/Items/Weapons/DroneGunItem.tscn" type="PackedScene" id=12]
+[ext_resource path="res://game_objects/Weapons/DroneGun.tscn" type="PackedScene" id=13]
+[ext_resource path="res://game_objects/Layers/Withering/withering_environment.tres" type="Environment" id=14]
+[ext_resource path="res://game_objects/Containers/container_usable.tscn" type="PackedScene" id=15]
+[ext_resource path="res://game_objects/PlayerInventory.tscn" type="PackedScene" id=16]
+[ext_resource path="res://game_objects/NpcManager.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/objects/XModules/XModule.cs" type="Script" id=18]
+[ext_resource path="res://src/py_scripts/lights_xmodule.py" type="Script" id=19]
+[ext_resource path="res://game_objects/WorldEnvironment.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/tests/TestStaticCube2.cs" type="Script" id=21]
+[ext_resource path="res://game_objects/Cutscenes/GetMacroExploiter.tscn" type="PackedScene" id=22]
+[ext_resource path="res://game_objects/Items/Tools/MacroExploiterItem.tscn" type="PackedScene" id=23]
+[ext_resource path="res://resources/models/locations/city/metro/trains/train_pass/train_pass_kinematic_body.tscn" type="PackedScene" id=24]
+[ext_resource path="res://game_objects/Items/Weapons/GrapplingGunItem.tscn" type="PackedScene" id=25]
+[ext_resource path="res://game_objects/Weapons/GrapplingGun.tscn" type="PackedScene" id=26]
+[ext_resource path="res://resources/models/locations/city/metro/trains/train_pass/train_pass_seat_short_kinematic_body.tscn" type="PackedScene" id=27]
+[ext_resource path="res://resources/models/locations/city/metro/trains/train_pass/train_pass_seat_kinematic_body.tscn" type="PackedScene" id=28]
+[ext_resource path="res://game_objects/Items/Weapons/WireEndItem.tscn" type="PackedScene" id=29]
+[ext_resource path="res://game_objects/Weapons/WireEnd.tscn" type="PackedScene" id=30]
+[ext_resource path="res://game_objects/Weapons/MacroExploiterWeapon.tscn" type="PackedScene" id=31]
+[ext_resource path="res://game_objects/Items/Building/stairs_item.tscn" type="PackedScene" id=32]
+[ext_resource path="res://resources/models/locations/city/metro/trains/train_pass/train_pass_doors_kinematic_body.tscn" type="PackedScene" id=33]
+[ext_resource path="res://resources/models/layers/memory_storage/objectives/memory_card/memory_card_rigid_body.tscn" type="PackedScene" id=34]
+[ext_resource path="res://src/objects/XModules/Door/DoorXModule.cs" type="Script" id=35]
+[ext_resource path="res://src/py_scripts/door_xmodule.py" type="Script" id=36]
+[ext_resource path="res://game_objects/Layers/City/Metro/train_pass_single_door_usable.tscn" type="PackedScene" id=37]
+[ext_resource path="res://scripts/SetEnvironment.gd" type="Script" id=38]
+[ext_resource path="res://game_objects/XModuleServer.tscn" type="PackedScene" id=39]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.768627, 0.768627, 0.768627, 1 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1, 1.06038, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="BoxShape" id=5]
+
+[node name="scene" type="Spatial"]
+script = ExtResource( 38 )
+environment = ExtResource( 14 )
+
+[node name="XModuleServer" parent="." instance=ExtResource( 39 )]
+
+[node name="PlayerInventory" parent="." instance=ExtResource( 16 )]
+
+[node name="NpcManager" parent="." instance=ExtResource( 17 )]
+
+[node name="VfxManager" parent="." instance=ExtResource( 7 )]
+
+[node name="GenerationManager" parent="." instance=ExtResource( 1 )]
+VoxelLODTerrainPath = NodePath("")
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.0932568, 0, -0.995642, 0, 1, 0, 0.995642, 0, -0.0932568, -0.461354, 10.4644, -22.3616 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 14.0923, 0, 0, 0, 1, 0, 0, 0, 27.3539, 0, 0, 0 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0631234, 0.0620522, -0.00788647 )
+generate_lightmap = false
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 3 )
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+transform = Transform( 0.816912, 0, 0, 0, 11.2757, 0, 0, 0, 0.905427, -2.92297, 5.02595, -42.253 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0631235, 0.0620522, -0.00788498 )
+generate_lightmap = false
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+shape = SubResource( 3 )
+
+[node name="StaticBody3" type="StaticBody" parent="."]
+transform = Transform( 14.0923, 0, 0, 0, 1, 0, 0, 0, 27.3539, -42.3608, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000936816, -0.00525165, 6.79621e-05 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
+shape = SubResource( 3 )
+
+[node name="tracer_block_item" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.53246, 1.19475, 0.458409 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 0, 0, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 0, 0, 16 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 0, 0, -16 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 0, 0, -32 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 16, 0, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 16, 0, 16 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 16, 0, -16 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 16, 0, -32 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance13" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 32, 0, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance14" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 32, 0, 16 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance15" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 32, 0, -16 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance16" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 10, 0, 0, 0, 0.4, 32, 0, -32 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 8 )
+
+[node name="TestStaticCube" parent="." instance=ExtResource( 9 )]
+transform = Transform( 14.4364, 0, 0, 0, 4.88473, 0, 0, 0, 4.39164, -20.3563, 3.37742, 12.0003 )
+
+[node name="TestStaticCube4" parent="." instance=ExtResource( 9 )]
+transform = Transform( -6.68623e-08, 0, -0.271536, 0, 2.0571, 0, 6.32958, 0, -4.91145e-08, -13.9538, 4.06234, 5.68663 )
+
+[node name="TestStaticCube2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 5.19146, 0, 0, 0, 2.5616, 0, 0, 0, 4.39164, -3.90099, 3.17888, 13.2427 )
+
+[node name="TestStaticCube3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 5.19146, 0, 0, 0, 2.336, 0, 0, 0, 4.39164, 3.11635, 1.1301, 15.1497 )
+
+[node name="TestStaticCube5" parent="." instance=ExtResource( 9 )]
+transform = Transform( 5.19145, -0.00525944, 0, 0.0116884, 2.33599, 0, 0, 0, 4.39164, -5.42205, 14.9271, 3.63704 )
+
+[node name="container_static_body" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.0106114, 0, -0.999944, 0, 1, 0, 0.999944, 0, 0.0106114, -13.7133, 3.27025, 5.82163 )
+Exports = {
+"scenes_to_spawn": [ ExtResource( 32 ) ],
+"timeout": 0.5
+}
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03699, 7.35029, 5.64933 )
+light_energy = 0.62
+omni_range = 13.4955
+omni_attenuation = 1.86607
+
+[node name="OmniLight3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6099, 10.4674, -16.0378 )
+light_energy = 0.62
+omni_range = 29.8
+omni_attenuation = 1.86607
+
+[node name="drone_holder_rigid_body" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47751, 2.45071, 5.0746 )
+Properties = {
+"damage": 0.25,
+"fire_speed": 0.1,
+"weapon": true,
+"weapon_scene": ExtResource( 13 )
+}
+
+[node name="GrapplingGunItem" parent="." instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.653711, 2.25063, 5.22586 )
+Properties = {
+"ammo_item_id": "tracer_block",
+"damage": 0.25,
+"weapon": true,
+"weapon_scene": ExtResource( 26 )
+}
+
+[node name="drone_holder_rigid_body2" parent="." instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.33372, 2.41355, 4.31747 )
+Properties = {
+"damage": 0.25,
+"weapon": true,
+"weapon_scene": ExtResource( 30 )
+}
+
+[node name="UI" parent="." instance=ExtResource( 4 )]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 20 )]
+environment = null
+
+[node name="system_unit" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.35742, 1.07098, -3.32899 )
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="city_1_static_body" parent="Spatial" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27579, 11.0778, -20.6064 )
+
+[node name="TestStaticCube" type="StaticBody" parent="Spatial"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.834962, 12.036, -17.3852 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_group_": true
+}
+Id = "lights"
+PythonScriptRes = ExtResource( 19 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/TestStaticCube"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000936866, -0.00525165, 6.79493e-05 )
+generate_lightmap = false
+mesh = SubResource( 4 )
+material/0 = ExtResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial/TestStaticCube"]
+shape = SubResource( 5 )
+
+[node name="TestStaticCube2" type="StaticBody" parent="Spatial"]
+transform = Transform( 0.5, 0, 0, 0, 0.366099, -0.340546, 0, 0.340546, 0.366099, 1.42771, 11.301, -21.1771 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_group_": true
+}
+CutsceneInstancePath = NodePath("get_macro_exploiter")
+
+[node name="get_macro_exploiter" parent="Spatial/TestStaticCube2" instance=ExtResource( 22 )]
+transform = Transform( -4.37114e-08, 7.97286e-09, -1, 0.681092, 0.732198, -2.39338e-08, 0.732198, -0.681092, -3.74356e-08, -3.00904, 1.18733, -1.10446 )
+TransitionSpeed = 4.0
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/TestStaticCube2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000936866, -0.00525165, 6.79493e-05 )
+generate_lightmap = false
+mesh = SubResource( 4 )
+material/0 = ExtResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial/TestStaticCube2"]
+shape = SubResource( 5 )
+
+[node name="TestStaticCube3" type="StaticBody" parent="Spatial"]
+transform = Transform( 0.5, 0, 0, 0, 0.366099, -0.340546, 0, 0.340546, 0.366099, 1.42771, 11.301, -19.1319 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_group_": true
+}
+CutsceneInstancePath = NodePath("get_macro_exploiter")
+
+[node name="get_macro_exploiter" parent="Spatial/TestStaticCube3" instance=ExtResource( 22 )]
+transform = Transform( -4.37114e-08, 7.97286e-09, -1, 0.681092, 0.732198, -2.39338e-08, 0.732198, -0.681092, -3.74356e-08, -3.00904, 1.18733, -1.10446 )
+TransitionSpeed = 4.0
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/TestStaticCube3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000936866, -0.00525165, 6.79493e-05 )
+generate_lightmap = false
+mesh = SubResource( 4 )
+material/0 = ExtResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial/TestStaticCube3"]
+shape = SubResource( 5 )
+
+[node name="Spatial" type="Spatial" parent="Spatial"]
+transform = Transform( 0.99991, -0.000362112, -0.0134164, -0.00569753, 0.893639, -0.448751, 0.0121519, 0.448787, 0.893556, -5.65786, 12.9021, -32.1563 )
+
+[node name="train_pass_kinematic_body" parent="Spatial/Spatial" instance=ExtResource( 24 )]
+transform = Transform( 1, -4.65661e-10, 0, -4.65661e-10, 1, 2.98023e-08, -2.79397e-09, -5.96046e-08, 1, 0, 0, 0 )
+
+[node name="train_pass_seat_kinematic_body" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 28 )]
+transform = Transform( -1, -5.06559e-10, -8.74198e-08, 5.06559e-10, 0.999933, -0.0115887, 8.74198e-08, -0.0115887, -0.999933, 1.26545, 0.334167, -1.57431 )
+
+[node name="train_pass_seat_kinematic_body3" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 28 )]
+transform = Transform( -0.9707, -0.239613, -0.0180966, -0.240296, 0.967943, 0.0731028, 8.60179e-08, 0.0753094, -0.99716, 1.2719, 0.751335, 1.2851 )
+
+[node name="train_pass_seat_kinematic_body4" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 28 )]
+transform = Transform( 1, -1.48057e-08, 1.47396e-07, -1.44297e-08, 0.985742, 0.168266, -1.6209e-07, -0.168266, 0.985742, -1.26874, 0.202454, 1.37354 )
+
+[node name="train_pass_seat_short_kinematic_body" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 27 )]
+transform = Transform( -0.999999, 9.16021e-09, -2.35431e-07, 4.14159e-09, 0.999915, 0.0130372, 2.50317e-07, 0.0130372, -0.999914, 1.24583, 0.326908, 6.29143 )
+
+[node name="train_pass_seat_short_kinematic_body2" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 27 )]
+transform = Transform( 0.999999, 2.15478e-09, 3.21203e-07, 8.75971e-08, 0.962327, -0.271894, -3.24418e-07, 0.271894, 0.962327, -1.29327, 0.278854, 6.29142 )
+
+[node name="train_pass_seat_kinematic_body5" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 28 )]
+transform = Transform( 1, -8.02046e-09, 1.48016e-07, 4.14159e-09, 0.999915, 0.0130372, -1.62894e-07, -0.0130372, 0.999915, -1.26874, 0.755489, -1.54265 )
+
+[node name="train_pass_seat_kinematic_body2" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 28 )]
+transform = Transform( -1, 1.98364e-09, -8.73777e-08, -1.98364e-09, 0.99897, 0.0453804, 8.73777e-08, 0.0453804, -0.99897, 1.26545, 1.49735, -1.56752 )
+
+[node name="train_pass_seat_short_kinematic_body3" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 27 )]
+transform = Transform( 4.37114e-08, 0, -0.78978, 0, 1, 0, 1, 0, 3.45224e-08, -1.21326, 0.819942, -6.89276 )
+
+[node name="train_pass_seat_short_kinematic_body4" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 27 )]
+transform = Transform( 4.37114e-08, 0, -0.78978, 0, 1, 0, 1, 0, 3.45224e-08, 1.04708, 0.497849, -6.89276 )
+
+[node name="OmniLight" type="OmniLight" parent="Spatial/Spatial/train_pass_kinematic_body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20813, 2.549, -5.93212 )
+light_energy = 0.5
+
+[node name="OmniLight2" type="OmniLight" parent="Spatial/Spatial/train_pass_kinematic_body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20813, 2.549, 4.30447 )
+light_energy = 0.5
+
+[node name="door1" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 33 )]
+transform = Transform( 1, 5.12227e-09, -1.58325e-08, 4.65661e-10, 1, 0, -2.23517e-08, -1.78814e-07, 1, 1.64088, 2.28882e-05, 4.14206 )
+
+[node name="door2" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 33 )]
+transform = Transform( -1, 0, -1.50874e-07, -4.65661e-10, 1, -1.78814e-07, 1.51806e-07, -1.78814e-07, -1, -1.63629, 2.86102e-05, 4.14206 )
+
+[node name="door3" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 33 )]
+transform = Transform( -1, 3.72529e-09, -1.50874e-07, 4.65661e-10, 1, -1.78814e-07, 1.53668e-07, -1.78814e-07, -1, -1.6363, 3.05176e-05, -4.13464 )
+
+[node name="door4" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 33 )]
+transform = Transform( 1, 1.86265e-09, 2.40281e-07, -4.65661e-10, 1, 1.78814e-07, -2.41213e-07, -1.78814e-07, 1, 1.64145, 3.71933e-05, -4.13464 )
+
+[node name="memory_card_rigid_body" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 34 )]
+transform = Transform( 1.39698e-08, -4.42378e-09, -0.307524, 3.72529e-08, 0.307524, -6.0536e-09, 0.307524, -5.96046e-08, 2.35159e-08, 1.52039, 1.92546, 5.56649 )
+mode = 3
+script = ExtResource( 35 )
+Id = "trdoor"
+PythonScriptRes = ExtResource( 36 )
+DoorNodesPaths = [ NodePath("../door1"), NodePath("../door2"), NodePath("../door3"), NodePath("../door4") ]
+
+[node name="single_door1" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 37 )]
+transform = Transform( -4.37722e-08, 0, 1, 0, 1, 0, -1, -1.78814e-07, -4.37722e-08, -0.0324001, 6.67572e-06, 7.16662 )
+
+[node name="single_door2" parent="Spatial/Spatial/train_pass_kinematic_body" instance=ExtResource( 37 )]
+transform = Transform( -4.37722e-08, 3.25963e-09, 1, 0, 1, 0, -1, -1.78814e-07, -4.37722e-08, -0.0324006, 1.43051e-05, -7.28638 )
+
+[node name="train_pass_kinematic_body2" parent="Spatial/Spatial" instance=ExtResource( 24 )]
+transform = Transform( 1, 3.25963e-09, -9.31323e-10, 1.86265e-09, 1, 5.96046e-08, -4.65661e-09, -5.96046e-08, 1, 1.43051e-06, 9.53674e-07, -15.468 )
+
+[node name="train_pass_seat_kinematic_body" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 28 )]
+transform = Transform( -1, -5.06559e-10, -8.74198e-08, 5.06559e-10, 0.999933, -0.0115887, 8.74198e-08, -0.0115887, -0.999933, 1.26545, 0.334167, -1.57431 )
+
+[node name="train_pass_seat_kinematic_body3" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 28 )]
+transform = Transform( -0.9707, -0.239613, -0.0180966, -0.240296, 0.967943, 0.0731028, 8.60179e-08, 0.0753094, -0.99716, 1.2719, 0.751335, 1.2851 )
+
+[node name="train_pass_seat_kinematic_body4" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 28 )]
+transform = Transform( 1, -1.48057e-08, 1.47396e-07, -1.44297e-08, 0.985742, 0.168266, -1.6209e-07, -0.168266, 0.985742, -1.26874, 0.202454, 1.37354 )
+
+[node name="train_pass_seat_short_kinematic_body" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 27 )]
+transform = Transform( -0.999999, 7.45058e-09, -2.34693e-07, 3.72529e-09, 0.999915, 0.0130372, 2.50526e-07, 0.0130372, -0.999914, 1.24583, 0.326908, 6.29143 )
+
+[node name="train_pass_seat_short_kinematic_body2" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 27 )]
+transform = Transform( 0.999999, 2.15478e-09, 3.21203e-07, 8.75971e-08, 0.962327, -0.271894, -3.24418e-07, 0.271894, 0.962327, -1.29327, 0.278854, 6.29142 )
+
+[node name="train_pass_seat_kinematic_body5" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 28 )]
+transform = Transform( 1, -8.02046e-09, 1.48016e-07, 4.14159e-09, 0.999915, 0.0130372, -1.62894e-07, -0.0130372, 0.999915, -1.26874, 0.755489, -1.54265 )
+
+[node name="train_pass_seat_kinematic_body2" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 28 )]
+transform = Transform( -1, 1.98364e-09, -8.73777e-08, -1.98364e-09, 0.99897, 0.0453804, 8.73777e-08, 0.0453804, -0.99897, 1.26545, 1.49735, -1.56752 )
+
+[node name="train_pass_seat_short_kinematic_body3" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 27 )]
+transform = Transform( 4.37114e-08, 0, -0.78978, 0, 1, 0, 1, 0, 3.45224e-08, -1.21326, 0.819942, -6.89276 )
+
+[node name="train_pass_seat_short_kinematic_body4" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 27 )]
+transform = Transform( 4.37114e-08, 0, -0.78978, 0, 1, 0, 1, 0, 3.45224e-08, 1.04708, 0.497849, -6.89276 )
+
+[node name="OmniLight" type="OmniLight" parent="Spatial/Spatial/train_pass_kinematic_body2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20813, 2.549, -5.93212 )
+light_energy = 0.5
+
+[node name="OmniLight2" type="OmniLight" parent="Spatial/Spatial/train_pass_kinematic_body2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20813, 2.549, 4.30447 )
+light_energy = 0.5
+
+[node name="single_door3" parent="Spatial/Spatial/train_pass_kinematic_body2" instance=ExtResource( 37 )]
+transform = Transform( -4.19095e-08, 1.86265e-09, 1, 0, 1, -2.32831e-09, -1, -2.98023e-07, -4.19095e-08, -0.0324001, 2.67029e-05, 7.10836 )
+
+[node name="macro_exploiter_rigid_body" parent="." instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74111, 11.0363, -23.0507 )
+Properties = {
+"placeable": true,
+"weapon": true,
+"weapon_scene": ExtResource( 31 )
+}
